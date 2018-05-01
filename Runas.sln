@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runas.Service", "Runas.Service\Runas.Service.csproj", "{FDB28627-7DAD-402B-A179-9B24867011F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runas.Test", "Runas.Test\Runas.Test.csproj", "{70BC1C23-9AF1-41CB-A957-FC006809FBC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDB28627-7DAD-402B-A179-9B24867011F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB28627-7DAD-402B-A179-9B24867011F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB28627-7DAD-402B-A179-9B24867011F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB28627-7DAD-402B-A179-9B24867011F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BC1C23-9AF1-41CB-A957-FC006809FBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BC1C23-9AF1-41CB-A957-FC006809FBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BC1C23-9AF1-41CB-A957-FC006809FBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BC1C23-9AF1-41CB-A957-FC006809FBC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {180727BD-8364-4D4B-939A-0DE86B3848D6}
+	EndGlobalSection
+EndGlobal
