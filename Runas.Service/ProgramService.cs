@@ -10,16 +10,54 @@ namespace Runas.Service
 {
     public class ProgramService : IProgramService
     {
-        ICredentials credentials;
-
-        public void Runas(string user, string cmd)
+        public void Runas(
+            string program,
+            NetworkCredential networkCredential = null,
+            bool loadProfile = false,
+            bool env = false,
+            bool netonly = false,
+            bool savecred = true,
+            bool smartcard = false,
+            string trustlevel = "0x20000"
+            )
         {
-            Process process = new Process();
             ProcessStartInfo processStartInfo = new ProcessStartInfo("runas");
-            if(user != null)
-                processStartInfo.Arguments = string.Format("/noprofile /savedcred /user:{0} {1}", user, cmd);
-            process.StartInfo = processStartInfo;
-            process.Start();
+
+            if(networkCredential != null)
+                processStartInfo.Arguments = string.Format(
+                    (loadProfile ? "/profile" : "/noprofile") +
+                    (env ? "/env " : string.Empty) + 
+                    (netonly ? "/netonly " : string.Empty) +
+                    (savecred ? "/savecred " : string.Empty) +
+                    (smartcard ? "/smartcard " : string.Empty) +
+                    "/user:{0} " +
+                    "/trustlevel {1}" +
+                    "{2}",
+                    networkCredential.UserName,
+                    trustlevel,
+                    program);
+
+            Process.Start(processStartInfo);
+        }
+
+        public void Runas(
+            string program,
+            string arguments = null,
+            NetworkCredential networkCredential = null
+            )
+        {
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(
+                program,
+                arguments
+                );
+
+            if(networkCredential != null)
+            {
+                processStartInfo.Domain = networkCredential.Domain;
+                processStartInfo.UserName = networkCredential.UserName;
+            }
+
+            Process.Start(processStartInfo);
         }
     }
 }
