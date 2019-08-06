@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Runas.Security;
-using System;
+using Runas.Service;
 
 namespace Runas.Test
 {

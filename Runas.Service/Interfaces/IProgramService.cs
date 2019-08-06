@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using Runas.Service.DataTransferObjects;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net;
 
 namespace Runas.Service
 {
@@ -14,5 +17,19 @@ namespace Runas.Service
             bool smartcard = false,
             string trustlevel = "0x20000"
             );
+
+        void Runas(
+            string program,
+            string arguments,
+            string userName,
+            string password);
+
+        Process Runas(
+            string program,
+            string arguments = null,
+            NetworkCredential networkCredential = null
+            );
+
+        IEnumerable<ProcessInfo> GetProcesses(string processName = null);
     }
 }

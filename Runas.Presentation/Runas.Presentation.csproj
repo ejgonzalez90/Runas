@@ -54,23 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Credentials\AddCredential.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Credentials\DeleteCredential.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Credentials\EditCredential.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Credentials\Index.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Credentials\ViewCredential.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -82,20 +70,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Credentials\AddCredential.xaml.cs">
-      <DependentUpon>AddCredential.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Credentials\DeleteCredential.xaml.cs">
-      <DependentUpon>DeleteCredential.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Credentials\EditCredential.xaml.cs">
       <DependentUpon>EditCredential.xaml</DependentUpon>
     </Compile>
     <Compile Include="Credentials\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Credentials\ViewCredential.xaml.cs">
-      <DependentUpon>ViewCredential.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -140,14 +119,13 @@
       <Project>{ab9a3aae-9b26-459a-bae8-87c997eec0e3}</Project>
       <Name>Runas.Dictionary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Runas.Security\Runas.Security.csproj">
-      <Project>{66fa7e45-8208-449f-9802-5a8c6b168098}</Project>
-      <Name>Runas.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Runas.Service\Runas.Service.csproj">
       <Project>{FDB28627-7DAD-402B-A179-9B24867011F5}</Project>
       <Name>Runas.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -41,9 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CredentialsService.cs" />
+    <Compile Include="DataTransferObjects\ProcessInfo.cs" />
     <Compile Include="Interfaces\IProgramService.cs" />
+    <Compile Include="Interfaces\IPasswordService.cs" />
+    <Compile Include="PasswordService.cs" />
     <Compile Include="ProgramService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

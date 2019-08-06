@@ -1,42 +1,60 @@
-﻿using Runas.Security.Interfaces;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Runas.Security
+namespace Runas.Service
 {
     /// <summary>
     /// It deals with encrypted reading and writing of passwords used for different users
     /// </summary>
-    public class PasswordService : IPasswordService
+    public class PasswordService : IPasswordService, IDisposable
     {
         private const string appFolder = "RunasSecurity";
-        private const string appPasswordFileName = "runas.security";        
-        private Encoding encoding = Encoding.Unicode;
+        private const string appPasswordFileName = "runas.security";
+
+        private readonly Encoding encoding = Encoding.Default;
+
         private FileStream passwordFileStream;
-        private const char separator = '\t';
+
+        private const char valueSeparator = '\t';
+        private const char lineSeparator = '\n';
         // private readonly string enteredPassword;
 
         private static PasswordService instace;
-        private static object instanceLocker = new object { };
+        private static readonly object instanceLocker = new object { };
 
-        private PasswordService(string enteredPassword)
+        private PasswordService(string enteredPassword, Encoding encoding)
         {
             // TODO: Usar para desencriptar
             // this.enteredPassword = enteredPassword;
+            if (encoding != null)
+            {
+                this.encoding = encoding;
+            }
 
             var passwordsFilePath = GetPasswordsFilePath();
             passwordFileStream = File.Open(passwordsFilePath, FileMode.OpenOrCreate);
         }
 
         /// <summary>
-        /// Gets a singleton instance of PasswordService. This implies reading a file, so 
+        /// Gets a singleton instance of PasswordService. This implies reading a file, so you need to manage service's disposal.
         /// </summary>
         /// <param name="enteredPassword"></param>
         /// <returns></returns>
-        public static PasswordService GetInstance(string enteredPassword)
+        public static PasswordService GetInstance(string enteredPassword) =>
+            GetInstance(
+                enteredPassword,
+                null
+                );
+
+        /// <summary>
+        /// Gets a singleton instance of PasswordService. This implies reading a file, so you need to manage service's disposal.
+        /// </summary>
+        /// <param name="enteredPassword"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static PasswordService GetInstance(string enteredPassword, Encoding encoding)
         {
             if (instace == null)
             {
@@ -44,7 +62,7 @@ namespace Runas.Security
                 {
                     if (instace == null)
                     {
-                        instace = new PasswordService(enteredPassword);
+                        instace = new PasswordService(enteredPassword, encoding);
                     }
                 }
             }
@@ -75,15 +93,45 @@ namespace Runas.Security
         /// <returns></returns>
         public string GetUserPassword(string userName)
         {
-            if (userName == null || string.IsNullOrEmpty(userName))
+            if (string.IsNullOrEmpty(userName))
             {
                 throw new ArgumentNullException("userName");
             }
 
-            byte[] passwordFile = new byte[passwordFileStream.Length];
-            var result = passwordFileStream.ReadAsync(passwordFile, 0, 5).Result;
+            string passwordFileAsString = GetPasswordFileAsString();
 
-            return "";
+            var result = passwordFileAsString
+                .Split(lineSeparator)
+                .SingleOrDefault(x => x.Split(valueSeparator)[0] == userName)
+                ?.Split(valueSeparator)[1];
+
+            return result;
+        }
+
+        private string GetPasswordFileAsString()
+        {
+            if (passwordFileStream.Length <= 0)
+            {
+                return null;
+            }
+
+            string result = null;
+
+            byte[] passwordFile = new byte[passwordFileStream.Length];
+
+            int read = 0;
+            if (passwordFileStream.CanRead)
+            {
+                read = passwordFileStream.Read(passwordFile, 0, (int)passwordFileStream.Length);
+                result = encoding.GetString(passwordFile);
+            }
+
+            if (read <= 0)
+            {
+                throw new Exception();
+            }
+
+            return result;
         }
 
         /// <summary>

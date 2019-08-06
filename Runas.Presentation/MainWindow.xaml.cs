@@ -1,20 +1,6 @@
-﻿using Runas.Security;
-using Runas.Security.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using Runas.Service;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Runas.Presentation
 {
@@ -24,12 +10,20 @@ namespace Runas.Presentation
     public partial class MainWindow : NavigationWindow
     {
         IPasswordService passwordService;
+        IProgramService programService;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            var userName = "ejgonzalez90@hotmail.com";
+
             this.passwordService = PasswordService.GetInstance("password");
+            var password = passwordService.GetUserPassword(userName);
+
+            this.programService = new ProgramService();
+            //programService.Runas("cmd", string.Empty, userName, password);
+
         }
 
         protected override void OnClosing(CancelEventArgs e)

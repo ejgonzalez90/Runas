@@ -34,12 +34,20 @@
             Usuario:
         </Label>
         <ComboBox Name="User" Grid.Column="3" Grid.Row="1">
-            <ComboBoxItem>elEmo-Laptop\ejgonzalez90@hotmail.com</ComboBoxItem>
+            <ComboBoxItem>ejgonzalez90@hotmail.com</ComboBoxItem>
         </ComboBox>
 
-        <Button Name="Execute" Grid.Column="3" Grid.Row="3" Click="Execute_Click">
-            Ejecutar
-        </Button>        
+        <TextBox Name="Arguments" Grid.Column="1" Grid.Row="3">
 
+        </TextBox>
+        
+        <Button Name="Execute" Grid.Column="3" Grid.Row="2" Click="Execute_Click" Height="20" Margin="0.2,0.6,-0.4,0" Grid.RowSpan="2" VerticalAlignment="Top">
+            Ejecutar
+        </Button>
+
+        <Button Name="Credentials" Grid.Column="0" Grid.Row="1" Click="Execute_Credentials" Height="20" Margin="0.2,0.6,-0.4,0" Grid.RowSpan="2" VerticalAlignment="Top">
+            Administrar credenciales
+        </Button>
+        
     </Grid>
 </Page>
